@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/placeholder_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:layout_constraintEnd_toStartOf="@+id/nfc_status"
+            app:layout_constraintStart_toStartOf="@+id/nfc_status">
+
+            <ImageView
+                android:id="@+id/nfc_image"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:tint="#646464"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.4"
+                app:srcCompat="@drawable/ic_nfc_black_24dp"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/nfc_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/nfc_image" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:gravity="center_horizontal|bottom"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/button_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:srcCompat="@drawable/ic_add_white_24dp" />
+            </LinearLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/exercise_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:descendantFocusability="beforeDescendants"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/exercise_friendly_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/text_friendlyname_hint"
+                        android:importantForAutofill="no"
+                        android:inputType="textNoSuggestions"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+                    <TextView
+                        android:id="@+id/exercise_id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:labelFor="@id/exercise_sets"
+                        android:text="@string/text_sets"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="#000000" />
+
+                    <EditText
+                        android:id="@+id/exercise_sets"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:minEms="2" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:labelFor="@id/exercise_repetitions"
+                        android:text="@string/text_repetitions"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="#000000" />
+
+                    <EditText
+                        android:id="@+id/exercise_repetitions"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:minEms="2" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:labelFor="@id/exercise_weight"
+                        android:text="@string/text_weight"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="#000000" />
+
+                    <EditText
+                        android:id="@+id/exercise_weight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:minEms="2" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="bottom"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/button_delete"
+                            style="@android:style/Widget.Material.Light.Button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginBottom="12dp"
+                            android:layout_weight="0.5"
+                            android:backgroundTint="#FF1744"
+                            android:text="@string/button_delete"
+                            android:textColor="#FFFFFF" />
+
+                        <Button
+                            android:id="@+id/button_close"
+                            style="@android:style/Widget.Material.Light.Button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="12dp"
+                            android:layout_marginBottom="12dp"
+                            android:layout_weight="0.5"
+                            android:text="@string/button_close" />
+                    </LinearLayout  >
+                </LinearLayout>
+            </ScrollView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
+</layout>
