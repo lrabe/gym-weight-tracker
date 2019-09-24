@@ -18,6 +18,8 @@ import de.lrabe.gymweighttracker.ui.main.SharedViewModel.NfcStatus.*
 import de.lrabe.gymweighttracker.util.InjectorUtils
 import de.lrabe.gymweighttracker.util.hideKeyboard
 import java.util.*
+import android.widget.EditText
+
 
 class MainFragment : Fragment() {
 
@@ -31,7 +33,6 @@ class MainFragment : Fragment() {
         viewModel = activity?.run {
             ViewModelProvider(this, viewModelFactory)[SharedViewModel::class.java]
         } ?: throw Exception("Invalid Activity")
-
     }
 
     override fun onCreateView(
@@ -70,10 +71,17 @@ class MainFragment : Fragment() {
             override fun afterTextChanged(editable: Editable?) {
                 val currentExercise = viewModel.selectedExercise.value
                 currentExercise?.apply {
-                    friendlyName = exerciseFriendlyName.text.toString()
-                    sets = exerciseSets.text.toString().toIntOrNull() ?: 0
-                    repetitions = exerciseRepetitions.text.toString().toIntOrNull() ?: 0
-                    weight = exerciseWeight.text.toString().toIntOrNull() ?: 0
+                    // adapted from https://stackoverflow.com/a/13787221
+                    when (editable.hashCode()) {
+                        exerciseFriendlyName.text.hashCode() ->
+                            friendlyName = exerciseFriendlyName.text.toString()
+                        exerciseSets.text.hashCode() ->
+                            sets = exerciseSets.text.toString().toIntOrNull() ?: 0
+                        exerciseRepetitions.text.hashCode() ->
+                            repetitions = exerciseRepetitions.text.toString().toIntOrNull() ?: 0
+                        exerciseWeight.text.hashCode() ->
+                            weight = exerciseWeight.text.toString().toIntOrNull() ?: 0
+                    }
                 }
                 currentExercise?.let {
                     viewModel.update(it)

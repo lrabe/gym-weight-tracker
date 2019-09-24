@@ -9,7 +9,8 @@ import de.lrabe.gymweighttracker.R
 import de.lrabe.gymweighttracker.ui.main.MainFragment
 
 
-class TabPagerAdapter(private val context: Context, fm: FragmentManager) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+class TabPagerAdapter(private val context: Context, fm: FragmentManager) :
+    FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
     override fun getItem(position: Int): Fragment {
         return if (position == 0) {

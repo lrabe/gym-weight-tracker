@@ -103,23 +103,31 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun handleIntent(newIntent: Intent) {
-        Toast.makeText(this, newIntent.action, Toast.LENGTH_SHORT).show()
-        Log.d("TEST", "handleIntent()")
         when (newIntent.action) {
             ACTION_NDEF_DISCOVERED -> {
-                Log.d("TEST", "intent ACTION_NDEF_DISCOVERED")
+                Log.d(TAG, "received intent ACTION_NDEF_DISCOVERED")
                 newIntent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES)?.let {
                     handleNdefMessages(it)
                 }
             }
-            else -> Log.d("TEST", "other intent: ${newIntent.action}")
+            else -> Log.d(TAG, "received other intent: ${newIntent.action}")
         }
     }
 
     private fun handleNdefMessages(rawMessages: Array<Parcelable>) {
+        if (rawMessages.isEmpty()) {
+            Toast.makeText(this, R.string.nfc_invalid_payload, Toast.LENGTH_SHORT).show()
+            return
+        }
+
         val ndefMessage = rawMessages[0] as NdefMessage
-        val payload = String(ndefMessage.records[0].payload)
-        Toast.makeText(this, "payload: $payload", Toast.LENGTH_SHORT).show()
+
+        if (ndefMessage.records.isEmpty()) {
+            Toast.makeText(this, R.string.nfc_invalid_payload, Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val payload = String(ndefMessage.records[0].payload).trim()
 
         viewModel.get(payload).observeOnce(this, Observer {
             if (it == null) {
@@ -130,20 +138,13 @@ class MainActivity : AppCompatActivity() {
                 viewModel.selectExercise(it)
             }
         })
-
-        /*val messages: List<NdefMessage> = rawMessages.map { it as NdefMessage }
-        messages.forEach { message ->
-            message.records.forEach { record ->
-                val payload = String(record.payload)
-                Log.d("TEST", "payload: $payload")
-                Toast.makeText(this, "payload: $payload", Toast.LENGTH_SHORT).show()
-
-
-            }
-        }*/
     }
 
     fun setCurrentTab(index: Int) {
         viewPager.currentItem = index
+    }
+
+    companion object {
+        private val TAG = MainActivity::class.java.simpleName
     }
 }

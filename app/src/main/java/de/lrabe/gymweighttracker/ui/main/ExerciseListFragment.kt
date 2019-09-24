@@ -23,7 +23,8 @@ class ExerciseListFragment : Fragment(), ExerciseListAdapter.ClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val viewModelFactory = InjectorUtils.provideSharedViewModelFactory(requireActivity().applicationContext)
+        val viewModelFactory =
+            InjectorUtils.provideSharedViewModelFactory(requireActivity().applicationContext)
         viewModel = activity?.run {
             ViewModelProvider(this, viewModelFactory)[SharedViewModel::class.java]
         } ?: throw Exception("Invalid Activity")

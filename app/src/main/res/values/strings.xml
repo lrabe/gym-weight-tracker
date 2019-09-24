@@ -6,6 +6,7 @@
     <string name="tab_title_devices">Devices</string>
     <string name="nfc_status_enabledy">Scan NFC tag</string>
     <string name="nfc_status_disabled">NFC is disabled</string>
+    <string name="nfc_invalid_payload">Unable to read tag</string>
 
     <!-- List Fragment -->
     <string name="text_friendlyname_hint">Friendly name</string>

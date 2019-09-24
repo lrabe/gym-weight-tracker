@@ -12,6 +12,7 @@ class ExerciseRepository private constructor(private val exerciseDao: ExerciseDa
         exerciseDao.insert(exercise)
     }
 
+    @WorkerThread
     suspend fun delete(exercise: Exercise) {
         exerciseDao.delete(exercise)
     }
@@ -20,13 +21,15 @@ class ExerciseRepository private constructor(private val exerciseDao: ExerciseDa
         return exerciseDao.getExercise(id)
     }
 
+    @WorkerThread
     suspend fun update(exercise: Exercise) {
         exerciseDao.update(exercise)
     }
 
     companion object {
 
-        @Volatile private var instance: ExerciseRepository? = null
+        @Volatile
+        private var instance: ExerciseRepository? = null
 
         fun getInstance(exerciseDao: ExerciseDao) =
             instance ?: synchronized(this) {

@@ -18,10 +18,12 @@ class ExerciseListAdapter internal constructor(
     private val inflater: LayoutInflater = LayoutInflater.from(context)
     private var exercises = emptyList<Exercise>() // Cached copy of exercises
 
-    inner class ExerciseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+    inner class ExerciseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
+        View.OnClickListener {
         init {
             itemView.setOnClickListener(this)
         }
+
         override fun onClick(v: View?) {
             onClickListener.onItemClick(adapterPosition, exercises[adapterPosition], v)
         }
